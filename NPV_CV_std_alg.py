@@ -2,11 +2,6 @@ import random
 from statistics import stdev
 from mtx_equivalence_rel import*
 
-def print_mtx(mtx):
-    for i in mtx: 
-        for i2 in i: 
-            print(i2, end=' ') 
-        print()
 
 def NVP_CV_STD_vote_alg(res_lst):
     #Вычисляем среднеквадратическое отклонение, берем его в качестве значения точности (эпсилон).
