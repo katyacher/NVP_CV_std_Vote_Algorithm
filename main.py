@@ -1,5 +1,4 @@
 import sqlite3
-
 from NPV_CV_std_alg import NVP_CV_STD_vote_alg as NVP_CV_STD_vote_alg
 
 #class Data(enum.Enum):
@@ -60,14 +59,14 @@ def load_data_and_vote(module_num, experiment_name, experiment_num):
             #experiment_data.clear() - не нужно, так как имена ключей повторяются и значения перезаписываются
 
     res_lst = []
-    corrent_experiment = 0
+    current_experiment = 0
     print(f"номер эксперимента \tкорректный ответ \tномер версии ")
     for experiment in version_answers:
         res_lst = [value for value in experiment.values()]
         try:
             correct_answer, version_num = NVP_CV_STD_vote_alg(res_lst)
-            print(f" {corrent_experiment} \t\t\t{correct_answer} \t\t {list(experiment.keys())[version_num]} ")
-            corrent_experiment+=1
+            print(f" {current_experiment} \t\t\t{correct_answer} \t\t {list(experiment.keys())[version_num]} ")
+            current_experiment+=1
         except Exception as err:
             print("Some exception: ", str(err))
        
