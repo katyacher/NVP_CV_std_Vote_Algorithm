@@ -49,23 +49,33 @@ def load_data_and_vote(module_num, experiment_name, experiment_num):
 
     version_answers = []
     experiment_data = {}
+    answers = []
+    
     i = module_num 
     for row in result:
         experiment_data[row[2]] = row[5] # или __dict__(row[Data.VERSION_NAME],row[Data.VERSION_ANSWER])
         i -= 1
         if i == 0:
             version_answers.append(experiment_data.copy())
+            answers.append(row[6])
             i = module_num
             #experiment_data.clear() - не нужно, так как имена ключей повторяются и значения перезаписываются
 
+    
+
     res_lst = []
     current_experiment = 0
-    print(f"номер эксперимента \tкорректный ответ \tномер версии ")
+    i = 0
+    print(f"номер эксперимента \tкорректный ответ \tномер версии \t\t\t эталонный ответ: \t ")
     for experiment in version_answers:
         res_lst = [value for value in experiment.values()]
         try:
             correct_answer, version_num = NVP_CV_STD_vote_alg(res_lst)
-            print(f" {current_experiment} \t\t\t{correct_answer} \t\t {list(experiment.keys())[version_num]} ")
+            print(f" {current_experiment} \t\t\t{correct_answer} \t\t {list(experiment.keys())[version_num]} \t\t\t{answers[current_experiment]} \t", end = " ")
+            if(correct_answer == answers[current_experiment]):
+                print("Ок")
+            else:
+                print("Didn't match")
             current_experiment+=1
         except Exception as err:
             print("Some exception: ", str(err))

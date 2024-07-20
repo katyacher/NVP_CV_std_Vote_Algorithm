@@ -2,7 +2,6 @@ import random
 from statistics import stdev
 from mtx_equivalence_rel import*
 
-
 def NVP_CV_STD_vote_alg(res_lst):
     #Вычисляем среднеквадратическое отклонение, берем его в качестве значения точности (эпсилон).
     epsilon = stdev(res_lst)
@@ -27,7 +26,7 @@ def NVP_CV_STD_vote_alg(res_lst):
         n+=1
 
     if not is_equivalent(consensus_mtx):
-        print("Voting is not possible, please chack your data")
+        print("Voting is not possible, please check your data")
         return 0,0
     else:
         # подсчет голосов
